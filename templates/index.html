@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CLIP Recommendation</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="center">
+        <form method="post", enctype="multipart/form-data">
+            <input type="text" name="text_input" value="">
+            <br></br>
+            <input type="file" id="image-input" name="image">
+            <br></br>
+            <input type="submit" value="Find Image">
+        </form>
+    </div>
+</body>
+</html>
