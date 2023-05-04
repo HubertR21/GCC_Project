@@ -8,7 +8,7 @@
     margin: 5px;
     float: left;
     width: 320px;
-    height: 400px;
+    height: 600px;
 }
 
 div.imageBox img {
@@ -19,4 +19,7 @@ div.imageBox img {
 .desc {
     padding: 15px;
     text-align: center;
+}
+h1 {
+    color: green;
 }
