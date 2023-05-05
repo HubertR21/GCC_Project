@@ -32,7 +32,7 @@ The images are present inside of the [Google Cloud Storage](https://cloud.google
 
 ## Processing
 
-The OpenAI [CLIP](https://github.com/openai/CLIP) is dockerized and deployed using [Cloud Run](https://cloud.google.com/run). The application is purely asynchronous as for the communication with the model and calling the images we are using a FastAPI.
+The OpenAI [CLIP](https://github.com/openai/CLIP) is dockerized with the rest of the application (hidden data + frontend) and deployed using [Cloud Run](https://cloud.google.com/run). The application is purely asynchronous as for the communication with the model and calling the images we are using a FastAPI.
 
 The [FastAPI](https://fastapi.tiangolo.com) is built on top of the ASGI (Asynchronous Server Gateway Interface) framework, which is designed to handle asynchronous code efficiently. Moreover it uses the async/await syntax to define asynchronous endpoints and functions.
 
