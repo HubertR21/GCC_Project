@@ -29,7 +29,7 @@ async def clip_search(request: Request):
 async def clip_search(request: Request, image: UploadFile = File(...)):
     form_data = await request.form()
     if form_data['image'].file.read()!=bytes(0):
-        pil_image = Image.open(image.file) # HERE IS THE IMAGE
+        pil_image = Image.open(image.file)
         image = preprocess(pil_image).unsqueeze(0).to(device)
         with torch.no_grad():
             image_features = model.encode_image(image)
@@ -39,7 +39,7 @@ async def clip_search(request: Request, image: UploadFile = File(...)):
             D=np.round(D*100,2)
         context = {'request': request,'urls':zip(urls,D[0])}
     else:
-        text = form_data["text_input"] # HERE IS THE TEXT (TEXT CAN BE URL?)
+        text = form_data["text_input"]
         with torch.no_grad():
             text_features = model.encode_text(clip.tokenize([text]).to(device))
             text_features /= text_features.norm(dim=-1, keepdim=True)

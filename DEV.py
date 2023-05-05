@@ -2,7 +2,6 @@ import clip
 import torch
 import requests
 from PIL import Image
-import numpy as np
 from io import BytesIO
 import faiss
 import pickle
@@ -29,7 +28,6 @@ for filename in filenames:
         index.add(image_features)
         if index.ntotal%100==0:
             print(index.ntotal)
-
 
 
 file = open('index.pkl',"wb")
