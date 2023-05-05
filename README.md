@@ -11,5 +11,5 @@ Google Cloud project for Cloud Computing classes on MiNI, WUT
 
 # Odpalanie dockera
 - docker build
-- docker tag default-service-fastpai:latest europe-west2-docker.pkg.dev/fast-api-gcc/repo/default-service-fastpai:latest
-- docker push europe-west2-docker.pkg.dev/fast-api-gcc/repo/default-service-fastpai:latest
+- docker tag default-service-fastpai:latest europe-west2-docker.pkg.dev/gcc2023-385607/repo/default-service-fastpai:latest
+- docker push europe-west2-docker.pkg.dev/gcc2023-385607/repo/default-service-fastpai:latest
