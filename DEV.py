@@ -15,19 +15,21 @@ index = faiss.IndexFlatIP(d)
 with open('filenames.txt','r') as f:
     filenames = f.readlines()
     f.close()
+try:
+    for filename in filenames:
+        url = "https://storage.googleapis.com/images_gcc2023/train2017/"+filename[:-1]
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+        image = preprocess(img).unsqueeze(0).to(device)
 
-for filename in filenames:
-    url = "https://storage.googleapis.com/images_gcc2023/train2017/"+filename[:-1]
-    response = requests.get(url)
-    img = Image.open(BytesIO(response.content))
-    image = preprocess(img).unsqueeze(0).to(device)
-
-    with torch.no_grad():
-        image_features = model.encode_image(image)
-        image_features /= image_features.norm(dim=-1, keepdim=True)
-        index.add(image_features)
-        if index.ntotal%100==0:
-            print(index.ntotal)
+        with torch.no_grad():
+            image_features = model.encode_image(image)
+            image_features /= image_features.norm(dim=-1, keepdim=True)
+            index.add(image_features)
+            if index.ntotal%100==0:
+                print(index.ntotal)
+except:
+    print('Connection error!')
 
 
 file = open('index.pkl',"wb")

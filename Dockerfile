@@ -12,10 +12,3 @@ COPY ./templates/index.html ./templates/index.html
 RUN python -m venv env
 RUN . env/bin/activate
 RUN pip install -r requirements.txt
-
-# Expose the app port
-EXPOSE 80
-
-RUN python DEV.py
-# Run command
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
