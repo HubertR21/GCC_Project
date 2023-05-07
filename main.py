@@ -29,21 +29,16 @@ async def clip_search(request: Request, image: UploadFile = File(...)):
     form_data = await request.form()
     if form_data['image'].file.read()!=bytes(0):
         pil_image = Image.open(image.file)
-        image = preprocess(pil_image).unsqueeze(0).to(device)
-        with torch.no_grad():
-            image_features = model.encode_image(image)
-            image_features /= image_features.norm(dim=-1, keepdim=True)
-            D, I = index.search(image_features, 20)
-            urls = list(map(lambda x: storage_url+x[:-1],np.array(filenames)[I[0]]))
-            D=np.round(D*100,2)
-        context = {'request': request,'urls':zip(urls,D[0])}
+        data = preprocess(pil_image).unsqueeze(0).to(device)
+        encode_data = model.encode_image
     else:
-        text = form_data["text_input"]
-        with torch.no_grad():
-            text_features = model.encode_text(clip.tokenize([text]).to(device))
-            text_features /= text_features.norm(dim=-1, keepdim=True)
-            D, I = index.search(text_features, 20)
-            urls = list(map(lambda x: storage_url+x[:-1],np.array(filenames)[I[0]]))
-            D=np.round(D*100,2)
-        context = {'request': request,'urls':zip(urls,D[0])}
+        data = form_data["text_input"]
+        encode_data = lambda x: model.encode_text(clip.tokenize([x]).to(device))
+    with torch.no_grad():
+        data = encode_data(data)
+        data /= data.norm(dim=-1, keepdim=True)
+        D, I = index.search(data, 20)
+        urls = list(map(lambda x: storage_url+x[:-1],np.array(filenames)[I[0]]))
+        D=np.round(D*100,2)
+    context = {'request': request,'urls':zip(urls,D[0])}
     return templates.TemplateResponse("images.html", context)
