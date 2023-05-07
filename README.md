@@ -23,7 +23,7 @@ This app allows uploading an image or the text, and then uses a CLIP (Contrastiv
 
 ## UI
 
-The UI is a static web page hosted on the [Google Cloud Container](https://cloud.google.com/compute/docs/containers). The minimalistic interface is written in the HTML and CSS only, without using any advances languages or engines. The interfeace also presents photos selected by the machine learning model in the form of url images. 
+The UI is a dynamic web page hosted on the [Google Cloud Container](https://cloud.google.com/compute/docs/containers). The content of web pages won't always remain the same for all users, as we use the API and the model to change the content of the webpage.
 
 ## Storage
 
