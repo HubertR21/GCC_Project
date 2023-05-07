@@ -18,7 +18,6 @@ with open('filenames.txt','r') as f:
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get('/', response_class=HTMLResponse)
 async def clip_search(request: Request):
